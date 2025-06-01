@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #5D33F6;
+  --primary-hover: #4924D9;
+  --accent-color: #19CB7D;
+  --accent-hover: #16B36F;
+  --error-color: #EF4444;
+  --warning-color: #F97316;
+  --success-color: #10B981;
+  --light-gray: #F9FAFB;
+  --medium-gray: #E5E7EB;
+  --dark-gray: #6B7280;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  @apply text-gray-900 bg-gray-50;
+}
+
+.card {
+  @apply bg-white rounded-lg shadow-sm p-6 transition-all;
+}
+
+.card:hover {
+  @apply shadow-md;
+}
+
+.btn {
+  @apply rounded-lg px-4 py-2 font-medium transition-all;
+}
+
+.btn-primary {
+  @apply bg-[var(--primary-color)] text-white;
+}
+
+.btn-primary:hover {
+  @apply bg-[var(--primary-hover)];
+}
+
+.btn-accent {
+  @apply bg-[var(--accent-color)] text-white;
+}
+
+.btn-accent:hover {
+  @apply bg-[var(--accent-hover)];
+}
+
+.btn-outline {
+  @apply border border-gray-300 text-gray-700;
+}
+
+.btn-outline:hover {
+  @apply bg-gray-50;
+}
+
+.badge {
+  @apply inline-block px-2 py-1 text-xs font-medium rounded-full;
+}
+
+.badge-green {
+  @apply bg-green-100 text-green-800;
+}
+
+.progress-bar {
+  @apply h-2 rounded-full bg-gray-200 overflow-hidden;
+}
+
+.progress-value {
+  @apply h-full rounded-full;
+}
+
+.section-title {
+  @apply text-xl font-semibold mb-4;
+}
+
+.card-title {
+  @apply text-lg font-medium mb-2;
+}
+
+input, select {
+  @apply rounded-lg border-gray-300 focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent transition-all;
+}
+
+.tag {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
