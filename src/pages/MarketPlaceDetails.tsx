@@ -4,7 +4,7 @@ import { Search, ArrowRight } from 'lucide-react';
 import PropertyCard from '../components/PropertyCard';
 import { properties, cities } from '../data/mockData';
 
-const Dashboard: React.FC = () => {
+const MarketPlaceDetails: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('Commercial');
   const [selectedCity, setSelectedCity] = useState('Mumbai');
@@ -24,11 +24,6 @@ const Dashboard: React.FC = () => {
     <div className="w-full">
       {/* Search and Filter */}
       <div className="mb-8 w-full">
-        <div className='flex flex-col mb-3'>
-      <h1 className="text-3xl font-bold text-gray-800">Dashboard</h1>
-      <p className="text-gray-600 mt-1 text-sm">Welcome To the Real Estate DApp!</p>
-      </div>
-
         <div className="relative mb-6 w-full">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <Search className="h-5 w-5 text-gray-400" />
@@ -148,40 +143,7 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* KYC Banner */}
-   {/* Enhanced KYC Banner */}
-   <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl shadow-lg p-8 mb-12 text-white relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
-          <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
-          <div className="relative flex items-center justify-between">
-            <div className="flex items-center">
-              <div className="bg-white/20 backdrop-blur-sm p-4 rounded-2xl mr-6">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold mb-2">Complete Your KYC Verification</h3>
-                <p className="text-orange-100">Unlock premium investments and higher limits</p>
-                <div className="flex items-center mt-2 space-x-4 text-sm">
-                  <span className="flex items-center">
-                    <span className="w-2 h-2 bg-green-300 rounded-full mr-2"></span>
-                    Identity Verified
-                  </span>
-                  <span className="flex items-center">
-                    <span className="w-2 h-2 bg-yellow-300 rounded-full mr-2"></span>
-                    Bank Details Pending
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className="text-right">
-              <button className="bg-white text-orange-600 hover:bg-orange-50 px-8 py-4 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg">
-                Complete KYC
-              </button>
-              <p className="text-orange-100 text-sm mt-2">2 minutes remaining</p>
-            </div>
-          </div>
-        </div>
+   
 
       {/* Explore Nearby Cities */}
       <div className="mb-12 w-full">
@@ -231,4 +193,4 @@ const ChevronDown = () => (
   </svg>
 );
 
-export default Dashboard;
+export default MarketPlaceDetails;

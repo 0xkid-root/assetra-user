@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSignup } from '../App'; // Import the signup context
 
 const Signup: React.FC = () => {
-  const { setIsSignedUp } = useSignup(); // Access the signup state updater
-  const navigate = useNavigate(); // For programmatic navigation
+  const navigate = useNavigate();
 
   // Array of images for the slideshow
   const images = [
     'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80',
     'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80',
     'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80',
-    'https://images.pexels.com/photos/1134176/pexels-photo-1134176.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=',
+    'https://images.pexels.com/photos/1134176/pexels-photo-1134176.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
   ];
 
   // State to track the current image index
@@ -29,9 +27,8 @@ const Signup: React.FC = () => {
     return () => clearInterval(interval);
   }, [images.length]);
 
-  // Simulate a signup action (in a real app, this would be a form submission)
+  // Handle signup button click (navigate to dashboard for now)
   const handleSignup = () => {
-    setIsSignedUp(true); // Update signup state
     navigate('/'); // Navigate to the dashboard
   };
 
@@ -58,7 +55,7 @@ const Signup: React.FC = () => {
       <div className="lg:w-1/2 w-full flex items-center justify-center py-12 px-4">
         <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
           <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Sign Up</h2>
-          {/* Simulated Signup Form */}
+          {/* Signup Form */}
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">Email</label>
             <input

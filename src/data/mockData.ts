@@ -117,7 +117,8 @@ export const properties: Property[] = [
     totalValue: 25440000,
     tenant: 'Microsoft',
     leaseYears: 10
-  }
+  },
+  
 ];
 
 export const cities: City[] = [
