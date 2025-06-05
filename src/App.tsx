@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import PropertyDetails from './pages/PropertyDetails';
@@ -11,17 +11,25 @@ import MyProperties from './pages/MyProperties';
 import AddProperty from './pages/AddProperty';
 import TransactionDetails from './pages/TransactionDetails';
 import MarketPlaceDetails from './pages/MarketPlaceDetails';
+import ProtectedRoute from './components/ProtectedRoute';
 import './index.css';
 
 function App() {
   return (
     <Router>
       <Routes>
+        {/* Redirect root to dashboard if authenticated */}
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        
         {/* Standalone Signup Route */}
         <Route path="/signup" element={<Signup />} />
 
-        {/* Layout Routes */}
-        <Route path="/" element={<Layout />}>
+        {/* Protected Layout Routes */}
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <Layout />
+          </ProtectedRoute>
+        }>
           <Route index element={<Dashboard />} />
           <Route path="property/:id" element={<PropertyDetails />} />
           <Route path="property/:id/buy" element={<BuyTokens />} />

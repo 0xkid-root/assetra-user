@@ -1,5 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { Upload, X, Image, MapPin, DollarSign, Building, FileText,  Receipt, Home, File } from 'lucide-react';
+import { Upload, X, Image, MapPin, DollarSign, Building, FileText, Receipt, Home, File } from 'lucide-react';
+import useIPFSUpload, { AssetsCreationMetadata } from "../hooks/useIPFSUpload";
+
 
 // Mock property type for the interface
 interface MyProperty {
@@ -9,12 +11,12 @@ interface MyProperty {
   propertyType: string;
   status: string;
   value: string;
-  tokens: number;
+  tokens: string;
   invested: string;
   image: string;
   description: string;
   listingFee: number;
-  areaSqft: number;
+  areaSqft: string;
   document: string; // New field for PDF document
 }
 
@@ -29,12 +31,12 @@ const AddProperty: React.FC = () => {
     propertyType: 'Residential',
     status: 'Active',
     value: '',
-    tokens: 0,
+    tokens: '',
     invested: '',
     image: '',
     description: '',
     listingFee: FIXED_LISTING_FEE,
-    areaSqft: 0,
+    areaSqft: '',
     document: '', // Initialize new document field
   });
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -42,6 +44,8 @@ const AddProperty: React.FC = () => {
   const [documentName, setDocumentName] = useState<string>(''); // New state for PDF file name
   const [isDragOver, setIsDragOver] = useState(false);
   const [isDocumentDragOver, setIsDocumentDragOver] = useState(false); // New state for PDF drag
+  const { uploadAssetsCreation } = useIPFSUpload();
+
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -137,26 +141,52 @@ const AddProperty: React.FC = () => {
     setDocumentName('');
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    alert('Property added successfully!\n' + JSON.stringify(form, null, 2));
-    setForm({
-      name: '',
-      location: '',
-      propertyType: 'Residential',
-      status: 'Active',
-      value: '',
-      tokens: 0,
-      invested: '',
-      image: '',
-      description: '',
-      listingFee: FIXED_LISTING_FEE,
-      areaSqft: 0,
-      document: '', // Reset document field
-    });
-    setImagePreview(null);
-    setFileName('');
-    setDocumentName(''); // Reset document name
+  const handleSubmit = async (e: FormEvent) => {
+    try {
+      e.preventDefault();
+      alert('Property added successfully!\n' + JSON.stringify(form, null, 2));
+      
+      // Transform form data to match AssetsCreationMetadata
+      const assetsMetadata: AssetsCreationMetadata = {
+        title: form.name,
+        description: form.description,
+        location: form.location,
+        category: form.propertyType,
+        value: form.value.toString(), // Ensure value is string
+        tokens: Number(form.tokens), // Convert to number if needed
+        currency: 'USDT',
+        propertyType: form.propertyType as 'Residential' | 'Land' | 'Commercial' | 'Industrial',
+        images: [], // Will handle file conversion
+        documents: [], // Will handle file conversion
+        validatorId: '',
+        areaSqft: form.areaSqft.toString() // Convert number to string
+      };
+
+      const ipfsResults = await uploadAssetsCreation(assetsMetadata);
+      console.log('IPFS Upload Results:', ipfsResults);
+
+      // Reset form
+      setForm({
+        name: '',
+        location: '',
+        propertyType: 'Residential',
+        status: 'Active',
+        value: '',
+        tokens: '0', // Convert to string
+        invested: '',
+        image: '',
+        description: '',
+        listingFee: FIXED_LISTING_FEE,
+        areaSqft: '0', // Convert to string
+        document: ''
+      });
+      setImagePreview(null);
+      setFileName('');
+      setDocumentName('');
+      
+    } catch (error) {
+      console.error('Error adding property:', error);
+    }
   };
 
   return (
