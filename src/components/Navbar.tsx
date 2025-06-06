@@ -70,7 +70,7 @@ const Navbar: React.FC = () => {
                     <p className="text-xs text-gray-500">john.doe@example.com</p>
                   </div>
                   <Link
-                    to="/profile"
+                    to="/dashboard/profile"
                     className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                     onClick={() => setShowProfileMenu(false)}
                   >
@@ -86,7 +86,7 @@ const Navbar: React.FC = () => {
                     Settings
                   </Link>
                   <Link
-                    to="/profile?tab=help"
+                    to="/dashboard/profile?tab=help"
                     className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                     onClick={() => setShowProfileMenu(false)}
                   >

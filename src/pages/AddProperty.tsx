@@ -190,7 +190,7 @@ const AddProperty: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-4 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50  py-4 px-4">
       <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
         {/* Header */}
         <div className="px-6 py-4 border-b border-gray-100">
