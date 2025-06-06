@@ -692,7 +692,7 @@ const PropertyDetails: React.FC = () => {
               
               <div className="mt-6">
                 <Link 
-                  to={`/property/${id}/buy`}
+                  to={`/dashboard/property/${id}/buy`}
                   className="block w-full py-2 px-4 bg-primary-600 hover:bg-primary-700 text-white text-center rounded-lg font-medium transition-colors"
                 >
                   Let's invest

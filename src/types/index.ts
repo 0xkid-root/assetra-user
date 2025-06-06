@@ -15,6 +15,7 @@ export interface Property {
   totalValue: number;
   tenant?: string;
   leaseYears?: number;
+  type?: string;
 }
 
 export interface City {

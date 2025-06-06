@@ -12,6 +12,7 @@ import AddProperty from './pages/AddProperty';
 import TransactionDetails from './pages/TransactionDetails';
 import MarketPlaceDetails from './pages/MarketPlaceDetails';
 import ProtectedRoute from './components/ProtectedRoute';
+import DividendsDetails from './pages/DividendsDetails';
 import './index.css';
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
           <Route path="add-property" element={<AddProperty />} />
           <Route path="transactions" element={<TransactionDetails />} />
           <Route path="marketplace" element={<MarketPlaceDetails />} />
+          <Route path="dividends" element={<DividendsDetails />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

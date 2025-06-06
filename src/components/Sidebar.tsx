@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {  useWeb3AuthDisconnect, } from "@web3auth/modal/react";
-import { Home, Building, BarChart3,  FileText,   ChevronLeft, ChevronRight, ShoppingBag, Plus, LogOut } from 'lucide-react';
+import { Home, Building, BarChart3,  FileText,   ChevronLeft, ChevronRight, ShoppingBag, Plus, LogOut, Coins } from 'lucide-react';
 import Logo from './Logo';
 import { useNavigate } from 'react-router-dom';
 
@@ -91,6 +91,16 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
             <Plus size={20} className={`${isCollapsed ? 'text-gray-600' : 'mr-4 text-gray-600'}`} />
             {!isCollapsed && <span className="text-sm font-medium">Add Property</span>}
           </Link>
+
+          <Link
+            to="/dashboard/dividends"
+            className={`flex items-center px-4 py-3 rounded-lg ${isActive('/dashboard/dividends')} ${isCollapsed ? 'justify-center' : ''}`}
+            title={isCollapsed ? 'Dividends' : undefined}
+          >
+            <Coins size={20} className={`${isCollapsed ? 'text-gray-600' : 'mr-4 text-gray-600'}`} />
+            {!isCollapsed && <span className="text-sm font-medium">Dividends</span>}
+          </Link>
+
           <Link
             to="/dashboard/portfolio"
             className={`flex items-center px-4 py-3 rounded-lg ${isActive('/dashboard/portfolio')} ${isCollapsed ? 'justify-center' : ''}`}

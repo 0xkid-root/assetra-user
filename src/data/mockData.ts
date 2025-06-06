@@ -11,6 +11,9 @@ export type MyProperty = {
   image: string;
 };
 
+export const PROPERTY_CATEGORIES = ['Commercial', 'Holiday Homes', 'Residential', 'Land Parcels'] as const;
+export type PropertyCategory = typeof PROPERTY_CATEGORIES[number];
+
 export const properties: Property[] = [
   {
     id: '1',
@@ -26,7 +29,8 @@ export const properties: Property[] = [
     rating: 4.6,
     isPreLeased: true,
     pricePerToken: 5000,
-    totalValue: 25000000
+    totalValue: 25000000,
+    type: 'Holiday Homes'
   },
   {
     id: '2',
@@ -44,7 +48,8 @@ export const properties: Property[] = [
     pricePerToken: 6000,
     totalValue: 27000000,
     tenant: 'Amazon',
-    leaseYears: 7
+    leaseYears: 7,
+    type: 'Residential'
   },
   {
     id: '3',
@@ -62,63 +67,30 @@ export const properties: Property[] = [
     pricePerToken: 7500,
     totalValue: 45000000,
     tenant: 'Microsoft',
-    leaseYears: 10
+    leaseYears: 10,
+    type: 'Commercial'
   },
+
   {
     id: '4',
-    title: 'Prestige Tech Park',
-    location: 'Outer Ring Road, Bangalore',
-    image: 'https://images.pexels.com/photos/443383/pexels-photo-443383.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    expectedYield: 22.5,
-    totalTokens: 3500,
-    tokensLeft: 2100,
-    percentInvested: 69,
-    lockInPeriod: '9 years',
-    investorCount: 34,
-    rating: 4.9,
+    title: 'zucis Square',
+    location: 'Bandra Kurla Complex, goa',
+    image: 'https://images.pexels.com/photos/462235/pexels-photo-462235.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    expectedYield: 28.2,
+    totalTokens: 6000,
+    tokensLeft: 4920,
+    percentInvested: 18,
+    lockInPeriod: '1 year',
+    investorCount: 12,
+    rating: 4.5,
     isPreLeased: true,
-    pricePerToken: 5500,
-    totalValue: 19250000,
-    tenant: 'IBM',
-    leaseYears: 9
-  },
-  {
-    id: '5',
-    title: 'Horizon Business Park',
-    location: 'Andheri East, Mumbai',
-    image: 'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    expectedYield: 21.2,
-    totalTokens: 5200,
-    tokensLeft: 3120,
-    percentInvested: 48,
-    lockInPeriod: '7 years',
-    investorCount: 27,
-    rating: 4.7,
-    isPreLeased: true,
-    pricePerToken: 4800,
-    totalValue: 24960000,
-    tenant: 'Amazon',
-    leaseYears: 7
-  },
-  {
-    id: '6',
-    title: 'Emerald Square',
-    location: 'Hitec City, Hyderabad',
-    image: 'https://images.pexels.com/photos/731082/pexels-photo-731082.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    expectedYield: 23.8,
-    totalTokens: 4800,
-    tokensLeft: 3900,
-    percentInvested: 35,
-    lockInPeriod: '10 years',
-    investorCount: 22,
-    rating: 4.8,
-    isPreLeased: true,
-    pricePerToken: 5300,
-    totalValue: 25440000,
+    pricePerToken: 7500,
+    totalValue: 45000000,
     tenant: 'Microsoft',
-    leaseYears: 10
+    leaseYears: 10,
+    type: 'Land Parcels'
   },
-  
+ 
 ];
 
 export const cities: City[] = [
@@ -398,23 +370,3 @@ export const myProperties = [
   }
 ];
 
-const transaction = {
-  id: "TXN123456789",
-  date: "2024-06-10 14:32",
-  property: {
-    name: "Lake View Apartment",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80",
-    location: "Bangalore"
-  },
-  type: "Buy",
-  amount: "₹2,00,000",
-  tokens: 40,
-  pricePerToken: "₹5,000",
-  status: "Success",
-  user: {
-    name: "John Doe",
-    email: "john@example.com"
-  },
-  reference: "REF20240610XYZ",
-  notes: "Investment for Q2 2024"
-};

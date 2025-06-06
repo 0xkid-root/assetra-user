@@ -17,8 +17,8 @@ const MarketPlaceDetails: React.FC = () => {
     { id: 'land', name: 'Land Parcels', count: 6 },
   ];
 
-  const trendingProperties = properties.slice(0, 3);
-  const preLeasedProperties = properties.filter((p) => p.isPreLeased).slice(0, 3);
+  const trendingProperties = properties.slice(0, 4);
+  const preLeasedProperties = properties.filter((p) => p.isPreLeased).slice(0, 4);
 
   return (
     <div className="w-full">

@@ -46,7 +46,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
       {/* Property content */}
       <div className="p-4">
         {/* Title & Location */}
-        <Link to={`/property/${property.id}`}>
+        <Link to={`/dashboard/property/${property.id}`}>
           <h3 className="text-lg font-medium text-gray-900 mb-1 truncate">
             {property.title}
           </h3>
