@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {  useWeb3AuthDisconnect, } from "@web3auth/modal/react";
-import { Home, Building, BarChart3,  FileText,   ChevronLeft, ChevronRight, ShoppingBag, Plus, LogOut, Coins } from 'lucide-react';
+import { Home, Building, BarChart3,  FileText,   ChevronLeft, ChevronRight, ShoppingBag, Plus, LogOut, Coins, HandCoins, ArrowLeftRight, Repeat,  ShieldPlus } from 'lucide-react';
 import Logo from './Logo';
 import { useNavigate } from 'react-router-dom';
 
@@ -100,7 +100,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
             <Coins size={20} className={`${isCollapsed ? 'text-gray-600' : 'mr-4 text-gray-600'}`} />
             {!isCollapsed && <span className="text-sm font-medium">Dividends</span>}
           </Link>
-
+  
           <Link
             to="/dashboard/portfolio"
             className={`flex items-center px-4 py-3 rounded-lg ${isActive('/dashboard/portfolio')} ${isCollapsed ? 'justify-center' : ''}`}
@@ -116,6 +116,41 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
           >
             <FileText size={20} className={`${isCollapsed ? 'text-gray-600' : 'mr-4 text-gray-600'}`} />
             {!isCollapsed && <span className="text-sm font-medium">Transactions</span>}
+          </Link>
+
+          <Link
+            to="/dashboard/borrow"
+            className={`flex items-center px-4 py-3 rounded-lg ${isActive('/dashboard/borrow')} ${isCollapsed ? 'justify-center' : ''}`}
+            title={isCollapsed ? 'Borrow' : undefined}
+          >
+            <HandCoins size={20} className={`${isCollapsed ? 'text-gray-600' : 'mr-4 text-gray-600'}`} />
+            {!isCollapsed && <span className="text-sm font-medium">Borrow</span>}
+          </Link>
+
+          <Link
+            to="/dashboard/exchange"
+            className={`flex items-center px-4 py-3 rounded-lg ${isActive('/dashboard/exchange')} ${isCollapsed ? 'justify-center' : ''}`}
+            title={isCollapsed ? 'Exchange' : undefined}
+          >
+            <ArrowLeftRight size={20} className={`${isCollapsed ? 'text-gray-600' : 'mr-4 text-gray-600'}`} />
+            {!isCollapsed && <span className="text-sm font-medium">Exchange</span>}
+          </Link>
+          
+          <Link
+            to="/dashboard/bridge-assets"
+            className={`flex items-center px-4 py-3 rounded-lg ${isActive('/dashboard/bridge-assets')} ${isCollapsed ? 'justify-center' : ''}`}
+            title={isCollapsed ? 'Bridge Assets' : undefined}
+          >
+            <Repeat size={20} className={`${isCollapsed ? 'text-gray-600' : 'mr-4 text-gray-600'}`} />
+            {!isCollapsed && <span className="text-sm font-medium">Bridge Assets</span>}
+          </Link>
+          <Link
+            to="/dashboard/compliance"
+            className={`flex items-center px-4 py-3 rounded-lg ${isActive('/dashboard/compliance')} ${isCollapsed ? 'justify-center' : ''}`}
+            title={isCollapsed ? 'Compliance' : undefined}
+          >
+            <ShieldPlus size={20} className={`${isCollapsed ? 'text-gray-600' : 'mr-4 text-gray-600'}`} />
+            {!isCollapsed && <span className="text-sm font-medium">Compliance</span>}
           </Link>
         </nav>
       </div>

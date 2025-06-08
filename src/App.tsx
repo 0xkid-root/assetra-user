@@ -13,6 +13,10 @@ import TransactionDetails from './pages/TransactionDetails';
 import MarketPlaceDetails from './pages/MarketPlaceDetails';
 import ProtectedRoute from './components/ProtectedRoute';
 import DividendsDetails from './pages/DividendsDetails';
+import Compliance from './pages/Compliance';
+import BridgeAssets from './pages/BridgeAssets';
+import Borrow from './pages/Borrow';
+import Exchange from './pages/Exchange';
 import './index.css';
 
 function App() {
@@ -26,6 +30,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
 
         {/* Protected Layout Routes */}
+        <Route path="/dashboard" element={<ProtectedRoute><Layout /></ProtectedRoute>}/>
         <Route path="/dashboard" element={
           <ProtectedRoute>
             <Layout />
@@ -41,6 +46,9 @@ function App() {
           <Route path="transactions" element={<TransactionDetails />} />
           <Route path="marketplace" element={<MarketPlaceDetails />} />
           <Route path="dividends" element={<DividendsDetails />} />
+          <Route path="compliance" element={<Compliance/>}/>
+          <Route path="exchange" element={<Exchange/>}/>
+          <Route path="borrow" element={<Borrow/>}/>
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
