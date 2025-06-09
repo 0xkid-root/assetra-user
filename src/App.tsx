@@ -32,7 +32,6 @@ function App() {
           <Route path="/signup" element={<Signup />} />
 
           {/* Protected Layout Routes */}
-          <Route path="/dashboard" element={<ProtectedRoute><Layout /></ProtectedRoute>}/>
           <Route path="/dashboard" element={
             <ProtectedRoute>
               <Layout />
