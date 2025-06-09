@@ -219,7 +219,7 @@ const AddProperty: React.FC = () => {
                     name="name"
                     value={form.name}
                     onChange={handleChange}
-                    className="w-full border-2 border-gray-200 rounded-lg pl-10 pr-3 py-3 focus:border-blue-500 focus:outline-none transition-colors text-sm"
+                    className="w-full border-2 bg-white border-gray-200 rounded-lg pl-10 pr-3 py-3 focus:border-blue-500 focus:outline-none transition-colors text-sm"
                     placeholder="Enter property name"
                     required
                   />
@@ -239,7 +239,7 @@ const AddProperty: React.FC = () => {
                     name="location"
                     value={form.location}
                     onChange={handleChange}
-                    className="w-full border-2 border-gray-200 rounded-lg pl-10 pr-3 py-3 focus:border-blue-500 focus:outline-none transition-colors text-sm"
+                    className="w-full border-2 bg-white border-gray-200 rounded-lg pl-10 pr-3 py-3 focus:border-blue-500 focus:outline-none transition-colors text-sm"
                     placeholder="Enter property location"
                     required
                   />
@@ -259,7 +259,7 @@ const AddProperty: React.FC = () => {
                       name="propertyType"
                       value={form.propertyType}
                       onChange={handleChange}
-                      className="w-full border-2 border-gray-200 rounded-lg pl-10 pr-8 py-3 focus:border-blue-500 focus:outline-none transition-colors appearance-none text-sm"
+                      className="w-full border-2 bg-white border-gray-200 rounded-lg pl-10 pr-8 py-3 focus:border-blue-500 focus:outline-none transition-colors appearance-none text-sm"
                       required
                     >
                       {propertyTypes.map((type) => (
@@ -283,7 +283,7 @@ const AddProperty: React.FC = () => {
                       name="status"
                       value={form.status}
                       onChange={handleChange}
-                      className="w-full border-2 border-gray-200 rounded-lg pl-10 pr-8 py-3 focus:border-blue-500 focus:outline-none transition-colors appearance-none text-sm"
+                      className="w-full border-2 bg-white border-gray-200 rounded-lg pl-10 pr-8 py-3 focus:border-blue-500 focus:outline-none transition-colors appearance-none text-sm"
                     >
                       {statusOptions.map((status) => (
                         <option key={status} value={status}>{status}</option>
@@ -310,7 +310,7 @@ const AddProperty: React.FC = () => {
                       name="value"
                       value={form.value}
                       onChange={handleChange}
-                      className="w-full border-2 border-gray-200 rounded-lg pl-10 pr-3 py-3 focus:border-blue-500 focus:outline-none transition-colors text-sm"
+                      className="w-full border-2 bg-white border-gray-200 rounded-lg pl-10 pr-3 py-3 focus:border-blue-500 focus:outline-none transition-colors text-sm"
                       placeholder="e.g., $250,000"
                       required
                     />
@@ -329,7 +329,7 @@ const AddProperty: React.FC = () => {
                       name="invested"
                       value={form.invested}
                       onChange={handleChange}
-                      className="w-full border-2 border-gray-200 rounded-lg pl-10 pr-3 py-3 focus:border-blue-500 focus:outline-none transition-colors text-sm"
+                      className="w-full border-2 bg-white border-gray-200 rounded-lg pl-10 pr-3 py-3 focus:border-blue-500 focus:outline-none transition-colors text-sm"
                       placeholder="e.g., $50,000"
                       required
                     />
@@ -351,7 +351,7 @@ const AddProperty: React.FC = () => {
                       name="tokens"
                       value={form.tokens}
                       onChange={handleChange}
-                      className="w-full border-2 border-gray-200 rounded-lg pl-10 pr-3 py-3 focus:border-blue-500 focus:outline-none transition-colors text-sm"
+                      className="w-full border-2 bg-white border-gray-200 rounded-lg pl-10 pr-3 py-3 focus:border-blue-500 focus:outline-none transition-colors text-sm"
                       placeholder="Enter number of tokens"
                       min={0}
                       required
@@ -400,7 +400,7 @@ const AddProperty: React.FC = () => {
                     value={form.description}
                     onChange={handleChange}
                     rows={4}
-                    className="w-full border-2 border-gray-200 rounded-lg pl-10 pr-3 py-3 focus:border-blue-500 focus:outline-none transition-colors resize-vertical text-sm"
+                    className="w-full border-2 bg-white border-gray-200 rounded-lg pl-10 pr-3 py-3 focus:border-blue-500 focus:outline-none transition-colors resize-vertical text-sm"
                     placeholder="Describe your property features, amenities, nearby facilities..."
                     required
                   />
@@ -537,7 +537,7 @@ const AddProperty: React.FC = () => {
             <button
               type="button"
               onClick={(e) => handleSubmit(e as any)}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-lg font-semibold text-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-blue-300 shadow-lg"
+              className="w-full bg-primary-600 hover:bg-primary-70 text-white py-4 rounded-lg font-semibold text-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-blue-300 shadow-lg"
             >
               Add Property to Listing
             </button>
