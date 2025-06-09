@@ -1,234 +1,304 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Search, ArrowRight } from 'lucide-react';
-import PropertyCard from '../components/PropertyCard';
-import { properties, cities } from '../data/mockData';
+import { Bell, TrendingUp, DollarSign, Home, AlertTriangle, Star, ChevronRight, Eye, EyeOff, Activity, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('Commercial');
-  const [selectedCity, setSelectedCity] = useState('Mumbai');
-  const [selectedFilter, setSelectedFilter] = useState('Active Assets');
-
-  const categories = [
-    { id: 'commercial', name: 'Commercial', count: 12 },
-    { id: 'holiday', name: 'Holiday Homes', count: 8 },
-    { id: 'residential', name: 'Residential', count: 15 },
-    { id: 'land', name: 'Land Parcels', count: 6 },
+  const [balanceVisible, setBalanceVisible] = useState(true);
+  
+  const transactions = [
+    { date: '2024-07-20', type: 'Share Purchase', asset: 'Property A', amount: '$50,000', status: 'Completed', change: '+2.3%' },
+    { date: '2024-07-15', type: 'Dividend Claim', asset: 'REIT B', amount: '$1,000', status: 'Completed', change: '+1.8%' },
+    { date: '2024-07-10', type: 'Loan Repayment', asset: 'Property C', amount: '$20,000', status: 'Completed', change: '-0.5%' },
   ];
 
-  const trendingProperties = properties.slice(0, 3);
-  const preLeasedProperties = properties.filter((p) => p.isPreLeased).slice(0, 3);
+  const properties = [
+    { name: 'Luxury Condos Downtown', value: '$2,000,000', return: '8.2%', status: 'High Demand', image: 'https://images.pexels.com/photos/323705/pexels-photo-323705.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2' },
+    { name: 'Commercial Plaza', value: '$1,500,000', return: '7.5%', status: 'Stable', image: 'https://images.pexels.com/photos/1134176/pexels-photo-1134176.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2' },
+    { name: 'Residential Complex', value: '$3,200,000', return: '9.1%', status: 'New Listing', image: 'https://images.pexels.com/photos/462235/pexels-photo-462235.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2' },
+  ];
 
   return (
-    <div className="w-full">
-      {/* Search and Filter */}
-      <div className="mb-8 w-full">
-        <div className='flex flex-col mb-3'>
-      <h1 className="text-3xl font-bold text-gray-800">Dashboard</h1>
-      <p className="text-gray-600 mt-1 text-sm">Welcome To the Real Estate DApp!</p>
-      </div>
-
-        <div className="relative mb-6 w-full">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Search className="h-5 w-5 text-gray-400" />
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+      {/* Header */}
+      <header className="bg-white/80 backdrop-blur-lg border-b border-white/20 sticky top-0 z-10">
+        <div className="p-6 flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Welcome back, Olivia ✨
+            </h1>
+            <p className="text-gray-600 mt-1">Here's what's happening with your investments today</p>
           </div>
-          <input
-            type="text"
-            className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-primary-600 sm:text-sm"
-            placeholder="Search by name or location..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
+         
         </div>
+      </header>
 
-        <div className="flex flex-wrap gap-2 mb-6 w-full">
-          {categories.map((category) => (
+      <div className="p-6 space-y-8">
+        {/* Portfolio Summary */}
+        <section>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-gray-800 flex items-center">
+              <TrendingUp className="w-6 h-6 mr-2 text-blue-600" />
+              Portfolio Overview
+            </h2>
             <button
-              key={category.id}
-              className={`flex items-center px-4 py-2 rounded-lg ${
-                selectedCategory === category.name
-                  ? 'bg-primary-100 border-b-2 border-primary-600 text-primary-700'
-                  : 'bg-white text-gray-700'
-              }`}
-              onClick={() => setSelectedCategory(category.name)}
+              onClick={() => setBalanceVisible(!balanceVisible)}
+              className="flex items-center text-gray-600 hover:text-blue-600 transition-colors"
             >
-              <span>{category.name}</span>
-              {category.count > 0 && (
-                <span className="ml-2 px-1.5 py-0.5 text-xs font-medium rounded-full bg-gray-100">
-                  {category.count}
-                </span>
-              )}
+              {balanceVisible ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}
+              <span className="ml-1 text-sm">{balanceVisible ? 'Hide' : 'Show'}</span>
             </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Trending Assets */}
-      <div className="mb-12 w-full">
-        <div className="flex justify-between items-center mb-4 w-full">
-          <h2 className="text-xl font-semibold">Trending Assets</h2>
-          <Link to="/properties" className="text-primary-600 hover:text-primary-700 flex items-center text-sm font-medium">
-            View All <ArrowRight size={16} className="ml-1" />
-          </Link>
-        </div>
-
-        <div className="flex justify-between items-center mb-4 w-full">
-          <div className="flex space-x-2">
-            <div className="relative inline-block">
-              <select
-                className="appearance-none pl-3 pr-8 py-2 bg-white border border-gray-300 rounded-lg text-sm"
-                value={selectedCity}
-                onChange={(e) => setSelectedCity(e.target.value)}
-              >
-                <option>Mumbai</option>
-                <option>Bangalore</option>
-                <option>Hyderabad</option>
-                <option>Delhi</option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <ChevronDown />
-              </div>
-            </div>
-
-            <div className="relative inline-block">
-              <select
-                className="appearance-none pl-3 pr-8 py-2 bg-white border border-gray-300 rounded-lg text-sm"
-                value={selectedFilter}
-                onChange={(e) => setSelectedFilter(e.target.value)}
-              >
-                <option>Active Assets</option>
-                <option>Funded Assets</option>
-                <option>New Arrivals</option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <ChevronDown />
-              </div>
-            </div>
           </div>
 
-          <div className="relative inline-block">
-            <select
-              className="appearance-none pl-3 pr-8 py-2 bg-white border border-gray-300 rounded-lg text-sm"
-            >
-              <option>High returns</option>
-              <option>Low risk</option>
-              <option>Recently added</option>
-            </select>
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-              <ChevronDown />
-            </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-          {trendingProperties.map((property) => (
-            <div key={property.id} className="w-full">
-              <PropertyCard property={property} />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Pre-leased Assets */}
-      <div className="mb-12 w-full">
-        <div className="flex justify-between items-center mb-4 w-full">
-          <h2 className="text-xl font-semibold">Pre-leased Assets</h2>
-          <Link to="/pre-leased" className="text-primary-600 hover:text-primary-700 flex items-center text-sm font-medium">
-            View All <ArrowRight size={16} className="ml-1" />
-          </Link>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-          {preLeasedProperties.map((property) => (
-            <div key={property.id} className="w-full">
-              <PropertyCard property={property} />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* KYC Banner */}
-   {/* Enhanced KYC Banner */}
-   <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl shadow-lg p-8 mb-12 text-white relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
-          <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
-          <div className="relative flex items-center justify-between">
-            <div className="flex items-center">
-              <div className="bg-white/20 backdrop-blur-sm p-4 rounded-2xl mr-6">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-white/20 hover:shadow-2xl hover:scale-105 transition-all duration-300 group">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl">
+                  <DollarSign className="w-6 h-6 text-white" />
+                </div>
+                <ArrowUpRight className="w-5 h-5 text-green-500 group-hover:scale-110 transition-transform" />
               </div>
-              <div>
-                <h3 className="text-2xl font-bold mb-2">Complete Your KYC Verification</h3>
-                <p className="text-orange-100">Unlock premium investments and higher limits</p>
-                <div className="flex items-center mt-2 space-x-4 text-sm">
-                  <span className="flex items-center">
-                    <span className="w-2 h-2 bg-green-300 rounded-full mr-2"></span>
-                    Identity Verified
-                  </span>
-                  <span className="flex items-center">
-                    <span className="w-2 h-2 bg-yellow-300 rounded-full mr-2"></span>
-                    Bank Details Pending
-                  </span>
+              <h3 className="text-sm text-gray-600 font-medium">Total Investment Value</h3>
+              <p className="text-3xl font-bold text-gray-900 mt-2">
+                {balanceVisible ? '$500,000' : '••••••'}
+              </p>
+              <p className="text-sm text-green-600 mt-2 flex items-center">
+                <ArrowUpRight className="w-4 h-4 mr-1" />
+                +12.5% this month
+              </p>
+            </div>
+
+            <div className="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-white/20 hover:shadow-2xl hover:scale-105 transition-all duration-300 group">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl">
+                  <Home className="w-6 h-6 text-white" />
+                </div>
+                <Activity className="w-5 h-5 text-blue-500 group-hover:scale-110 transition-transform" />
+              </div>
+              <h3 className="text-sm text-gray-600 font-medium mb-3">Asset Breakdown</h3>
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-700">Property A</span>
+                  <span className="font-semibold text-gray-900">$300,000</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full" style={{width: '60%'}}></div>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-700">REIT B</span>
+                  <span className="font-semibold text-gray-900">$200,000</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="bg-gradient-to-r from-green-500 to-teal-500 h-2 rounded-full" style={{width: '40%'}}></div>
                 </div>
               </div>
             </div>
-            <div className="text-right">
-              <button className="bg-white text-orange-600 hover:bg-orange-50 px-8 py-4 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg">
-                Complete KYC
-              </button>
-              <p className="text-orange-100 text-sm mt-2">2 minutes remaining</p>
+
+            <div className="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-white/20 hover:shadow-2xl hover:scale-105 transition-all duration-300 group">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-gradient-to-r from-green-500 to-green-600 rounded-2xl">
+                  <TrendingUp className="w-6 h-6 text-white" />
+                </div>
+                <div className="text-2xl group-hover:animate-bounce">📈</div>
+              </div>
+              <h3 className="text-sm text-gray-600 font-medium">Recent Performance</h3>
+              <p className="text-3xl font-bold text-green-600 mt-2">+5.2%</p>
+              <p className="text-sm text-gray-600 mt-2">Last 30 days</p>
             </div>
           </div>
-        </div>
+        </section>
 
-      {/* Explore Nearby Cities */}
-      <div className="mb-12 w-full">
-        <h2 className="text-xl font-semibold mb-4">Explore Nearby Cities</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-          {cities.map((city) => (
-            <Link
-              to={`/cities/${city.id}`}
-              key={city.id}
-              className="relative rounded-lg overflow-hidden h-48 w-full"
-            >
-              <img
-                src={city.image}
-                alt={city.name}
-                className="w-full h-full object-cover transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 p-4 text-white">
-                <h3 className="text-xl font-semibold truncate">{city.name}</h3>
-                <div className="flex items-center mt-2">
-                  <span className="text-xs bg-white/20 rounded-full px-2 py-1 truncate">
-                    {city.projectCount}+ Projects
-                  </span>
-                  <span className="text-xs ml-2 truncate">Top Returns: {city.returns}%</span>
+        {/* Financial Activity */}
+        <section>
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+            <Activity className="w-6 h-6 mr-2 text-purple-600" />
+            Financial Activity
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-3xl p-8 shadow-lg border border-green-100 hover:shadow-2xl transition-all duration-300 group">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-green-700 font-medium mb-1">Unclaimed Dividends</p>
+                  <p className="text-3xl font-bold text-green-600">1,500 USDC</p>
+                  <p className="text-sm text-green-600 mt-2">Ready to claim</p>
+                </div>
+                <button className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-2xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center">
+                  Claim
+                  <ChevronRight className="w-4 h-4 ml-1" />
+                </button>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-r from-red-50 to-orange-50 rounded-3xl p-8 shadow-lg border border-red-100 hover:shadow-2xl transition-all duration-300">
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <div className="flex items-center mb-2">
+                    <AlertTriangle className="w-5 h-5 text-red-500 mr-2" />
+                    <p className="text-sm text-red-700 font-medium">Loan Status Alert</p>
+                  </div>
+                  <p className="text-xl font-bold text-red-600 mb-3">High LTV Warning</p>
+                  <div className="space-y-2 text-sm text-gray-700">
+                    <div className="flex justify-between">
+                      <span>Total Borrowed:</span>
+                      <span className="font-semibold">100,000 USDC</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Collateral Value:</span>
+                      <span className="font-semibold">150,000 USDC</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>LTV Ratio:</span>
+                      <span className="font-bold text-red-600">66.67%</span>
+                    </div>
+                  </div>
+                  <div className="w-full bg-red-200 rounded-full h-2 mt-4">
+                    <div className="bg-gradient-to-r from-red-500 to-red-600 h-2 rounded-full" style={{width: '67%'}}></div>
+                  </div>
                 </div>
               </div>
-            </Link>
-          ))}
+            </div>
+          </div>
+        </section>
+
+
+
+        {/* Featured Properties */}
+        <section>
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+            <Star className="w-6 h-6 mr-2 text-yellow-500" />
+            Featured Investment Opportunities
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {properties.map((property, index) => (
+              <div key={index} className="bg-white/70 backdrop-blur-sm rounded-3xl shadow-lg border border-white/20 overflow-hidden hover:shadow-2xl hover:scale-105 transition-all duration-300 group cursor-pointer">
+                <div className="h-48 relative overflow-hidden">
+                  <img
+                    src={property.image}
+                    alt={property.name}
+                    className="object-cover w-full h-full"
+                  />
+                  <div className="absolute top-4 right-4">
+                    <span className="bg-green-500 backdrop-blur-sm text-gray-800 px-3 py-1 rounded-full text-sm font-medium">
+                      {property.status}
+                    </span>
+                  </div>
+                  <div className="absolute bottom-4 left-4 text-white ">
+                    <div className="text-2xl font-bold">{property.return}</div>
+                    <div className="text-sm opacity-90 ">Expected Return</div>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                    {property.name}
+                  </h3>
+                  <p className="text-2xl font-bold text-gray-700 mb-4">{property.value}</p>
+                  <button className="w-full ple-500 bg-primary-600 hover:bg-primary-70 text-white py-3 rounded-2xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center justify-center">
+                    View Details
+                    <ChevronRight className="w-4 h-4 ml-1" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Compliance & Announcements */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Compliance Alerts */}
+          <section>
+            <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
+              <AlertTriangle className="w-5 h-5 mr-2 text-orange-500" />
+              Compliance Alerts
+            </h2>
+            <div className="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-3xl p-6 shadow-lg border border-orange-100 hover:shadow-xl transition-all duration-300">
+              <div className="flex items-center">
+                <div className="p-3 bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl mr-4">
+                  <span className="text-white text-xl">📄</span>
+                </div>
+                <div className="flex-1">
+                  <p className="text-gray-900 font-semibold mb-2">KYC Verification Required</p>
+                  <p className="text-sm text-gray-600 mb-4">Complete your verification to unlock all features</p>
+                  <button className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200">
+                    Complete Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Platform Announcements */}
+          <section>
+            <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
+              <Bell className="w-5 h-5 mr-2 text-blue-500" />
+              Latest Updates
+            </h2>
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-6 shadow-lg border border-blue-100 hover:shadow-xl transition-all duration-300">
+              <div className="flex items-center">
+                <div className="p-3 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl mr-4">
+                  <span className="text-white text-xl">🚀</span>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-gray-900 font-bold mb-2">Automated Reinvestment</h3>
+                  <p className="text-sm text-gray-600 mb-4">Maximize returns with our new smart reinvestment feature</p>
+                  <button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200">
+                    Learn More
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
+
+
+                {/* Recent Transactions */}
+                <section>
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+            <Activity className="w-6 h-6 mr-2 text-blue-600" />
+            Recent Transactions
+          </h2>
+          <div className="bg-white/70 backdrop-blur-sm rounded-3xl shadow-lg border border-white/20 overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className=" bg-primary-600 hover:bg-primary-70 text-white">
+                    <th className="p-4 text-left font-semibold">Date</th>
+                    <th className="p-4 text-left font-semibold">Type</th>
+                    <th className="p-4 text-left font-semibold">Asset</th>
+                    <th className="p-4 text-left font-semibold">Amount</th>
+                    <th className="p-4 text-left font-semibold">Change</th>
+                    <th className="p-4 text-left font-semibold">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {transactions.map((txn, index) => (
+                    <tr key={index} className="border-b border-gray-100 hover:bg-blue-50/50 transition-colors">
+                      <td className="p-4 text-gray-700">{txn.date}</td>
+                      <td className="p-4 text-gray-700 font-medium">{txn.type}</td>
+                      <td className="p-4 text-gray-700">{txn.asset}</td>
+                      <td className="p-4 text-gray-900 font-semibold">{txn.amount}</td>
+                      <td className="p-4">
+                        <span className={`flex items-center ${txn.change.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
+                          {txn.change.startsWith('+') ? 
+                            <ArrowUpRight className="w-4 h-4 mr-1" /> : 
+                            <ArrowDownRight className="w-4 h-4 mr-1" />
+                          }
+                          {txn.change}
+                        </span>
+                      </td>
+                      <td className="p-4">
+                        <span className="bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-2 rounded-full text-sm font-medium">
+                          {txn.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
       </div>
     </div>
   );
 };
-
-const ChevronDown = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-5 w-5"
-    viewBox="0 0 20 20"
-    fill="currentColor"
-  >
-    <path
-      fillRule="evenodd"
-      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-      clipRule="evenodd"
-    />
-  </svg>
-);
 
 export default Dashboard;
