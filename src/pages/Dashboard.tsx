@@ -19,7 +19,10 @@ const Dashboard: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-lg border-b border-white/20 sticky top-0 z-10">
+      
+
+      <div className="p-6 space-y-8">
+
         <div className="p-6 flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -29,9 +32,7 @@ const Dashboard: React.FC = () => {
           </div>
          
         </div>
-      </header>
 
-      <div className="p-6 space-y-8">
         {/* Portfolio Summary */}
         <section>
           <div className="flex items-center justify-between mb-6">
@@ -169,7 +170,7 @@ const Dashboard: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {properties.map((property, index) => (
               <div key={index} className="bg-white/70 backdrop-blur-sm rounded-3xl shadow-lg border border-white/20 overflow-hidden hover:shadow-2xl hover:scale-105 transition-all duration-300 group cursor-pointer">
-                <div className="h-48 relative overflow-hidden">
+                <div className="h-48 w-full relative overflow-hidden">
                   <img
                     src={property.image}
                     alt={property.name}

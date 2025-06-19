@@ -9,12 +9,15 @@ const MarketPlaceDetails: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('Commercial');
   const [selectedCity, setSelectedCity] = useState('Mumbai');
   const [selectedFilter, setSelectedFilter] = useState('Active Assets');
-
+  
   const categories = [
     { id: 'commercial', name: 'Commercial', count: 12 },
     { id: 'holiday', name: 'Holiday Homes', count: 8 },
     { id: 'residential', name: 'Residential', count: 15 },
     { id: 'land', name: 'Land Parcels', count: 6 },
+    { id: 'industrial', name: 'Industrial', count: 10 },
+    { id: 'agricultural', name: 'Agricultural Land', count: 4 },
+    { id: 'hospitality', name: 'Hospitality', count: 5 },
   ];
 
   const trendingProperties = properties.slice(0, 4);
